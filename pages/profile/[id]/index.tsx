@@ -1,8 +1,7 @@
-import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, NextPage } from "next";
+import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import Navbar from "../../../components/Navbar";
 import Profile from "../../../components/Profile";
 import axios from 'axios'
-import { ParsedUrlQuery } from "querystring";
 
 export interface IProfileProps {
     avatar: string;
@@ -33,7 +32,7 @@ export const getStaticProps: GetStaticProps = async (context: GetStaticPropsCont
     }
 }
 
-export const getStaticPaths: GetStaticPaths<ParsedUrlQuery> = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
     const response = await axios.get(`/users`)
     return {
         paths: response.data.items.map((item: { id: string; }) => ({
